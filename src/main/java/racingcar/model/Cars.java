@@ -37,14 +37,18 @@ public class Cars {
     }
 
     public List<String> winners() {
-        int highScore = cars.stream()
-                .mapToInt(Car::getPosition)
-                .max()
-                .getAsInt();
+        int highScore = getHighScore();
 
         return cars.stream()
                 .filter(car -> car.getPosition() >= highScore)
                 .map(Car::getName)
                 .collect(Collectors.toList());
+    }
+
+    private int getHighScore() {
+        return cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .getAsInt();
     }
 }
